@@ -45,25 +45,7 @@ function scrapeURL() {
 	  });
 	});
 }
-/* TODO: make two more routes
- * -/-/-/-/-/-/-/-/-/-/-/-/- */
 
-// Route 1
-// =======
-// This route will retrieve all of the data
-// from the scrapedData collection as a json (this will be populated
-// by the data you scrape using the next route)
-
-// Route 2
-// =======
-// When you visit this route, the server will
-// scrape data from the site of your choice, and save it to
-// MongoDB.
-// TIP: Think back to how you pushed website data
-// into an empty array in the last class. How do you
-// push it into a MongoDB collection instead?
-
-/* -/-/-/-/-/-/-/-/-/-/-/-/- */
 
 app.get("/all", function(req, res) {
 	db.scrapeData.find({}, function(error, found) {
@@ -76,10 +58,10 @@ app.get("/all", function(req, res) {
 	});
 });
 
-app.get("/scrape", function(data) {
-	scrapeURL(data);
+// app.get("/scrape", function(data) {
+// 	scrapeURL(data);
 
-})
+// })
 
 
 
