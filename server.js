@@ -12,6 +12,7 @@ var Article = require("./models/Article.js");
 // Our scraping tools
 var request = require("request");
 var cheerio = require("cheerio");
+var exphbs = require("express-handlebars");
 // Set mongoose to leverage built in JavaScript ES6 Promises
 mongoose.Promise = Promise;
 
@@ -24,12 +25,13 @@ app.use(logger("dev"));
 app.use(bodyParser.urlencoded({
   extended: false
 }));
-
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.set("view engine", "handlebars");
 // Make public a static dir
 app.use(express.static("public"));
 
 // Database configuration with mongoose
-mongoose.connect("mongodb://localhost/scraping-mongoose");
+mongoose.connect("mongodb://localhost/mongo_scraper");
 var db = mongoose.connection;
 
 // Show any mongoose errors
@@ -82,10 +84,11 @@ app.get("/scrape", function(req, res) {
   });
   // Tell the browser that we finished scraping the text
   res.send("Scrape Complete");
+ 
 });
 
 // This will get the articles we scraped from the mongoDB
-app.get("/articles", function(req, res) {
+app.get("/", function(req, res) {
   // Grab every doc in the Articles array
   Article.find({}, function(error, doc) {
     // Log any errors
@@ -94,7 +97,9 @@ app.get("/articles", function(req, res) {
     }
     // Or send the doc to the browser as a json object
     else {
-      res.json(doc);
+      // res.json(doc);
+    res.render("index", {article: doc});
+
     }
   });
 });
