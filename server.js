@@ -83,7 +83,7 @@ app.get("/scrape", function(req, res) {
     });
   });
   // Tell the browser that we finished scraping the text
-  res.send("Scrape Complete");
+  res.redirect('/');
  
 });
 
@@ -95,9 +95,8 @@ app.get("/", function(req, res) {
     if (error) {
       console.log(error);
     }
-    // Or send the doc to the browser as a json object
     else {
-      // res.json(doc);
+     
     res.render("index", {article: doc});
 
     }

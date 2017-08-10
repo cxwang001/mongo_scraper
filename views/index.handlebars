@@ -1,7 +1,9 @@
-<ul>
+<div class="container">
 	{{#each article}}
-	  <p>Title: {{title}}</p>
-	  <p>Link: ${{link}}</p>
+	  <div class="alert alert-info"><p>{{title}}</p></div>
+	  <p>{{link}}</p>
+	  <button type="button" class="btn btn-primary" id="noteButton">Add Notes</button>
 	  <hr>
 	{{/each}}
-</ul>
+
+</div>

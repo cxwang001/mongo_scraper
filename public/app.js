@@ -7,7 +7,8 @@
 
 
 // ON ARTICLE CLICK
-$(document).on("click", "p", function() {
+// $(document).on("click", "p", function() {
+$("#noteButton").on('click', function() {
   $("#notes").empty();
   var thisId = $(this).attr("data-id");
 
