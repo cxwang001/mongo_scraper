@@ -31,12 +31,12 @@ app.set("view engine", "handlebars");
 app.use(express.static("public"));
 
 // Database configuration with mongoose
-mongoose.connect("mongodb://localhost/mongo_scraper");
+// mongoose.connect("mongodb://localhost/mongo_scraper");
 
 if (process.env.MONGODB_URI) {
   mongoose.connect(process.env.MONGODB_URI);
 } else {
-  mongoose.connect(databaseUri);
+  mongoose.connect("mongodb://localhost/mongo_scraper");
 }
 
 
