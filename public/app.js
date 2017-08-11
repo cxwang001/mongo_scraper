@@ -5,7 +5,7 @@
 //   }
 // });
 
-
+$(document).ready(function(){
 // ON ARTICLE CLICK
 // $(document).on("click", "p", function() {
 $("#noteButton").on('click', function() {
@@ -30,7 +30,7 @@ $("#noteButton").on('click', function() {
       }
     });
 });
-
+});
 // SAVING NOTE
 $(document).on("click", "#savenote", function() {
   var thisId = $(this).attr("data-id");
