@@ -2,8 +2,21 @@
 	{{#each article}}
 	  <div class="alert alert-info"><p>{{title}}</p></div>
 	  <p>{{link}}</p>
-	  <button type="button" class="btn btn-primary" id="noteButton">Add Notes</button>
+	  <button type="button" class="btn btn-primary" data-value="{{this._id}}" id="noteButton">Add Notes</button>
 	  <hr>
-	{{/each}}
+
+
+
+<div id="notes"></div>
+  {{/each}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/js/materialize.min.js"></script>
+
+
+
+
+
+
+
 
 </div>
