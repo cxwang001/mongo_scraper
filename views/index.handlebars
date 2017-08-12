@@ -1,22 +1,39 @@
-<div class="container">
-	{{#each article}}
-	  <div class="alert alert-info"><p>{{title}}</p></div>
-	  <p>{{link}}</p>
-	  <button type="button" class="btn btn-primary" data-value="{{this._id}}" id="noteButton">Add Notes</button>
-	  <hr>
-
-
-
-<div id="notes"></div>
-  {{/each}}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/js/materialize.min.js"></script>
-
-
-
-
-
-
-
-
+<div id="container">
+    <div class="jumbotron">
+        <h1 class="text-center">Reddit Article Scraper</h1>
+    </div>
+    <div id="scrape">
+        <button type="button" class="btn btn-secondary btn-lg" id="scrapearticles">Scrape Articles</button>
+    </div>
+    <div id="articles">
+        <ol>        
+            {{#each article}}
+                <li>
+                    {{this.title}}
+                    {{this.link}}
+                        {{#if this.note}}
+                            {{#each this.note}}
+                                <p class="well">
+                                    {{./comment}}
+                                    <div class="btn">
+                                        <button data-id="{{this.note._id}}" id="deletenote">Delete Note</button>
+                                    </div>
+                                </p>
+                            {{/each}}
+                        {{/if}}
+                <br>
+        <form class="create-update-form" action="/articles/{{this._id}}/notes" method="POST">
+            <div class="form-group">
+                <input type="text" name="comment">
+            </div>
+            <div class="btn">
+                <button type="submit" class="sub">Save Note</button>
+            </div>
+        </form>
+                </li>
+            <br>
+            {{/each}}
+        </ol>
+    </div>
 </div>
+    
