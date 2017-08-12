@@ -54,14 +54,17 @@ app.use(express.static("public"));
 var db = process.env.MONGODB_URI || "mongodb://localhost/mongo_scraper";
 // Show any mongoose errors
 
-db.on("error", function(error) {
-  console.log("Mongoose Error: ", error);
+mongoose.connect(db, function(error) {
+  // Log any errors connecting with mongoose
+  if (error) {
+    console.log(error);
+  }
+  // Or log a success message
+  else {
+    console.log("mongoose connection is successful");
+  }
 });
 
-// Once logged in to the db through mongoose, log a success message
-db.once("open", function() {
-  console.log("Mongoose connection successful.");
-});
 
 // Routes
 // ======
