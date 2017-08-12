@@ -33,12 +33,15 @@ app.use(express.static("public"));
 // Database configuration with mongoose
 // mongoose.connect("mongodb://localhost/mongo_scraper");
 
-if (process.env.MONGODB_URI) {
-  mongoose.connect(process.env.MONGODB_URI);
-} else {
-  mongoose.connect("mongodb://localhost/mongo_scraper");
-}
 
+var databaseUri = "mongodb://localhost/mongo_scraper";
+
+if (process.env.MONGODB_URI) {
+ mongoose.connect(process.env.MONGODB_URI, {
+ useMongoClient: true
+ });
+} else {
+  mongoose.connect(databaseUri, {useMongoClient: true}); 
 
 var db = mongoose.connection;
 
