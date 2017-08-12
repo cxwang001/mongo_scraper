@@ -38,7 +38,7 @@ app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
 // Serve static content for the app from the "public" directory in the application directory.
-// app.use(express.static(process.cwd() + "/public"));
+
 app.use(express.static("public"));
 // Database configuration with mongoose
 // mongoose.connect("mongodb://localhost/mongo_scraper");
@@ -55,7 +55,7 @@ if (process.env.MONGODB_URI) {
  mongoose.connect(process.env.MONGODB_URI);
 } else {
   mongoose.connect(databaseUri);
-}
+};
 // Show any mongoose errors
 db.on("error", function(error) {
   console.log("Mongoose Error: ", error);
