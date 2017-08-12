@@ -52,11 +52,9 @@ var db = mongoose.connection;
 var databaseUri = "mongodb://localhost/mongo_scraper";
 
 if (process.env.MONGODB_URI) {
- mongoose.connect(process.env.MONGODB_URI, {
- useMongoClient: true
- });
+ mongoose.connect(process.env.MONGODB_URI);
 } else {
-  mongoose.connect(databaseUri, {useMongoClient: true}); 
+  mongoose.connect(databaseUri);
 }
 // Show any mongoose errors
 db.on("error", function(error) {
