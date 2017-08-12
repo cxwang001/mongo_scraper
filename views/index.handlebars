@@ -1,39 +1,11 @@
-<div id="container">
-    <div class="jumbotron">
-        <h1 class="text-center">Reddit Article Scraper</h1>
-    </div>
-    <div id="scrape">
-        <button type="button" class="btn btn-secondary btn-lg" id="scrapearticles">Scrape Articles</button>
-    </div>
-    <div id="articles">
-        <ol>        
-            {{#each article}}
-                <li>
-                    {{this.title}}
-                    {{this.link}}
-                        {{#if this.note}}
-                            {{#each this.note}}
-                                <p class="well">
-                                    {{./comment}}
-                                    <div class="btn">
-                                        <button data-id="{{this.note._id}}" id="deletenote">Delete Note</button>
-                                    </div>
-                                </p>
-                            {{/each}}
-                        {{/if}}
-                <br>
-        <form class="create-update-form" action="/articles/{{this._id}}/notes" method="POST">
-            <div class="form-group">
-                <input type="text" name="comment">
-            </div>
-            <div class="btn">
-                <button type="submit" class="sub">Save Note</button>
-            </div>
-        </form>
-                </li>
-            <br>
-            {{/each}}
-        </ol>
-    </div>
-</div>
-    
+<h1>Web Development Reddit Articles</h1>
+
+<h2>Click here to get the Web Development Articles from the Reddit!</h2>
+
+<ul>
+    {{#each article}}
+      <p>{{title}}</p>
+      <p>{{link}}</p>
+      <hr>
+    {{/each}}
+</ul>

@@ -50,7 +50,7 @@ var db = mongoose.connection;
 
 // Database configuration with mongoose
 var databaseUri = "mongodb://localhost/mongo_scraper";
-var MONGODB_URI = "mongodb://heroku_q90r2xmt:p0vic6ck9k0rea400aqmotrogh@ds131512.mlab.com:31512/heroku_q90r2xmt";
+// var MONGODB_URI = "mongodb://heroku_q90r2xmt:p0vic6ck9k0rea400aqmotrogh@ds131512.mlab.com:31512/heroku_q90r2xmt";
 if (process.env.MONGODB_URI) {
  mongoose.connect(process.env.MONGODB_URI);
 } else {
@@ -70,15 +70,15 @@ db.once("open", function() {
 // ======
 
 // Simple index route
-app.get("/", function(req, res) {
-  Article.find({}).populate('note').exec(function(error, doc) {
-    var hbsObject = {
-      article: doc
-    };
-    console.log(hbsObject);
-    res.render("index", hbsObject);
-  });
-});
+// app.get("/", function(req, res) {
+//   Article.find({}).populate('note').exec(function(error, doc) {
+//     var hbsObject = {
+//       article: doc
+//     };
+//     console.log(hbsObject);
+//     res.render("index", hbsObject);
+//   });
+// });
 
 // A GET request to scrape the website
 app.get("/scrape", function(req, res) {
@@ -115,7 +115,7 @@ app.get("/scrape", function(req, res) {
   });
   // Tell the browser that we finished scraping the text
   // res.send("Scrape complete!");
-  res.redirect('/');
+  res.render('scraper',{title:"REDDIT'S WEBDEV"});
 });
 
 
@@ -153,8 +153,9 @@ app.get("/articles/:id", function(req, res) {
   });
 });
 
+
 // Create a new note or replace an existing note
-app.post("/articles/:id/notes", function(req, res) {
+app.post("/articles/:id", function(req, res) {
   // Create a new note and pass the req.body to the entry
   var newNote = new Note(req.body);
 
@@ -164,13 +165,10 @@ app.post("/articles/:id/notes", function(req, res) {
     if (error) {
       console.log(error);
     }
-    //else 
-    //  res.send(doc);
     // Otherwise
-    
     else {
       // Use the article id to find and update it's note
-      Article.findOneAndUpdate({ "_id": req.params.id }, { $push: { "note": doc._id } }, { new: true })
+      Article.findOneAndUpdate({ "_id": req.params.id }, { "note": doc._id })
       // Execute the above query
       .exec(function(err, doc) {
         // Log any errors
@@ -179,29 +177,14 @@ app.post("/articles/:id/notes", function(req, res) {
         }
         else {
           // Or send the document to the browser
-          // res.send(doc);
-          res.redirect('/');
-        }      
+          res.send(doc);
+        }
       });
-    }  
+    }
   });
 });
 
-app.delete("/notes/:id", function(req, res) {
-  console.log("id: " + req.params.id)
-  Note.remove({"_id": req.params.id})
-  // Execute the above query
-  .exec(function(err, doc) {
-    // Log any errors
-    if (err) {
-      console.log(err);
-    }
-    else {
-    // Or send the document to the browser
-      res.redirect('/');
-    }
-  });
-})
+
 
 // Listen on port 8080
 app.listen(8080, function() {

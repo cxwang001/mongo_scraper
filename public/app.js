@@ -1,35 +1,69 @@
-
-// Grab the articles as a json
+// GRAB ARTICLES
 $.getJSON("/articles", function(data) {
- 
   for (var i = 0; i < data.length; i++) {
     $("#articles").append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].link + "</p>");
   }
 });
 
-//click the scrape articles button
-$(document).on("click", "#scrapearticles", function() {
-  // Run a GET request to delete the note, using what's entered in the inputs
+
+// ON ARTICLE CLICK
+$(document).on("click", "p", function() {
+  $("#notes").empty();
+  var thisId = $(this).attr("data-id");
+
+  // GET ARTICLE
   $.ajax({
     method: "GET",
-    url: "/scrape",
+    url: "/articles/" + thisId
   })
-    .done(function() {
-      console.log("Scrape successful")
+    .done(function(data) {
+      console.log(data);
+      $("#notes").append("<h2>" + data.title + "</h2>");
+      $("#notes").append("<input id='titleinput' name='title' >");
+      $("#notes").append("<textarea id='bodyinput' name='body'></textarea>");
+      $("#notes").append("<button data-id='" + data._id + "' id='savenote'>Save Note</button>");
+      $("#notes").append("<button data-id='" + data._id + "' id='delnote'>Delete Note</button>");
+      if (data.note) {
+        $("#titleinput").val(data.note.title);
+        $("#bodyinput").val(data.note.body);
+      }
     });
 });
 
-// click the delete note button
-$(document).on("click", "#deletenote", function() {
-  // Grab the id associated with the note from the submit button
+// SAVING NOTE
+$(document).on("click", "#savenote", function() {
   var thisId = $(this).attr("data-id");
-
-  // Run a POST request to delete the note, using what's entered in the inputs
   $.ajax({
-    method: "DELETE",
-    url: "/notes/" + thisId,
+    method: "POST",
+    url: "/articles/" + thisId,
+    data: {
+      title: $("#titleinput").val(),
+      body: $("#bodyinput").val()
+    }
   })
-    .done(function() {
-      console.log("note deleted!")
+    .done(function(data) {
+      console.log(data);
+      $("#notes").empty();
     });
+  $("#titleinput").val("");
+  $("#bodyinput").val("");
+});
+
+// DELETE NOTE
+$(document).on("click", "#delnote", function() {
+  var thisId = $(this).attr("data-id");
+  $.ajax({
+    method: "POST",
+    url: "/articles/" + thisId,
+    data: {
+      title: "",
+      body: ""
+    }
+  })
+    .done(function(data) {
+      console.log(data);
+      $("#notes").empty();
+    });
+  $("#titleinput").val("");
+  $("#bodyinput").val("");
 });
