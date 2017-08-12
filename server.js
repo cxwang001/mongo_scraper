@@ -38,15 +38,15 @@ app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
 // Serve static content for the app from the "public" directory in the application directory.
-app.use(express.static(process.cwd() + "/public"));
-
+// app.use(express.static(process.cwd() + "/public"));
+app.use(express.static("public"));
 // Database configuration with mongoose
 // mongoose.connect("mongodb://localhost/mongo_scraper");
 
 // mongoose.connect("mongodb://heroku_tds6xj2t:tros3llla8me2tpriofhl7td1j@ds157459.mlab.com:57459/heroku_tds6xj2t");
 var db = mongoose.connection;
 // Make public a static dir
-// app.use(express.static("public"));
+
 
 // Database configuration with mongoose
 var databaseUri = "mongodb://localhost/mongo_scraper";
