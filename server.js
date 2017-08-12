@@ -49,15 +49,11 @@ app.use(express.static("public"));
 
 
 // Database configuration with mongoose
-var databaseUri = "mongodb://localhost/mongo_scraper";
+// var databaseUri = "mongodb://localhost/mongo_scraper";
 // var MONGODB_URI = "mongodb://heroku_q90r2xmt:p0vic6ck9k0rea400aqmotrogh@ds131512.mlab.com:31512/heroku_q90r2xmt";
-if (process.env.MONGODB_URI) {
- mongoose.connect(process.env.MONGODB_URI);
-} else {
-  mongoose.connect(databaseUri);
-};
+var db = process.env.MONGODB_URI || "mongodb://localhost/mongo_scraper";
 // Show any mongoose errors
-var db = mongoose.connection;
+
 db.on("error", function(error) {
   console.log("Mongoose Error: ", error);
 });
