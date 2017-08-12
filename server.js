@@ -44,7 +44,7 @@ app.use(express.static("public"));
 // mongoose.connect("mongodb://localhost/mongo_scraper");
 
 // mongoose.connect("mongodb://heroku_tds6xj2t:tros3llla8me2tpriofhl7td1j@ds157459.mlab.com:57459/heroku_tds6xj2t");
-var db = mongoose.connection;
+
 // Make public a static dir
 
 
@@ -57,6 +57,7 @@ if (process.env.MONGODB_URI) {
   mongoose.connect(databaseUri);
 };
 // Show any mongoose errors
+var db = mongoose.connection;
 db.on("error", function(error) {
   console.log("Mongoose Error: ", error);
 });
