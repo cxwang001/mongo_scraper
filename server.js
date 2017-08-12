@@ -51,11 +51,11 @@ var db = mongoose.connection;
 // Database configuration with mongoose
 var databaseUri = "mongodb://localhost/mongo_scraper";
 
-if (process.env.MONGODB_URI) {
- mongoose.connect(process.env.MONGODB_URI);
-} else {
-  mongoose.connect(databaseUri);
-};
+// if (process.env.MONGODB_URI) {
+ mongoose.connect(process.env.MONGODB_URI)};
+// } else {
+//   mongoose.connect(databaseUri);
+// };
 // Show any mongoose errors
 db.on("error", function(error) {
   console.log("Mongoose Error: ", error);
