@@ -14,9 +14,9 @@ var Article = require("./models/Article.js");
 var request = require("request");
 var cheerio = require("cheerio");
 // Mongoose mpromise deprecated - use bluebird promises
-var Promise = require("bluebird");
+// var Promise = require("bluebird");
 
-mongoose.Promise = Promise;
+// mongoose.Promise = Promise;
 
 
 // Initialize Express
