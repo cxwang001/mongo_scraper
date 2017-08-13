@@ -41,26 +41,41 @@ app.set("view engine", "handlebars");
 
 app.use(express.static("public"));
 
+if(process.env.NODE_ENV == 'production'){
+    mongoose.connect('mongodb://heroku_q90r2xmt:p0vic6ck9k0rea400aqmotrogh@ds131512.mlab.com:31512/heroku_q90r2xmt')
+} else{
+    mongoose.connect('mongodb://localhost/mongo_scraper');
+}
+var db = mongoose.connection;
 
+//show errors
+db.on('error', function(err){
+    console.log (err);
+});
+
+//if logged in show success message
+db.once('open', function(){
+    console.log('Mongoose connection successful!');
+});
 // Make public a static dir
 
 
 // Database configuration with mongoose
 // var databaseUri = "mongodb://localhost/mongo_scraper";
-var MONGODB_URI = "mongodb://heroku_q90r2xmt:p0vic6ck9k0rea400aqmotrogh@ds131512.mlab.com:31512/heroku_q90r2xmt";
-var db = process.env.MONGODB_URI || "mongodb://localhost/mongo_scraper";
-// Show any mongoose errors
+// var MONGODB_URI = "mongodb://heroku_q90r2xmt:p0vic6ck9k0rea400aqmotrogh@ds131512.mlab.com:31512/heroku_q90r2xmt";
+// var db = process.env.MONGODB_URI || "mongodb://localhost/mongo_scraper";
+// // Show any mongoose errors
 
-mongoose.connect(db, function(error) {
-  // Log any errors connecting with mongoose
-  if (error) {
-    console.log(error);
-  }
-  // Or log a success message
-  else {
-    console.log("mongoose connection is successful");
-  }
-});
+// mongoose.connect(db, function(error) {
+//   // Log any errors connecting with mongoose
+//   if (error) {
+//     console.log(error);
+//   }
+//   // Or log a success message
+//   else {
+//     console.log("mongoose connection is successful");
+//   }
+// });
 
 
 // Routes
