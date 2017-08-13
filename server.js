@@ -48,9 +48,9 @@ app.use(express.static("public"));
 // Database configuration with mongoose
 // var databaseUri = "mongodb://localhost/mongo_scraper";
 // var MONGODB_URI = "mongodb://heroku_q90r2xmt:p0vic6ck9k0rea400aqmotrogh@ds131512.mlab.com:31512/heroku_q90r2xmt";
-// var db = process.env.MONGODB_URI || "mongodb://localhost/mongo_scraper";
+var db = process.env.MONGODB_URI || "mongodb://localhost/mongo_scraper";
 // Show any mongoose errors
-var db = process.env.MONGODB_URI ;
+
 mongoose.connect(db, function(error) {
   // Log any errors connecting with mongoose
   if (error) {
