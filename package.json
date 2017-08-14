@@ -1,30 +1,31 @@
 {
-  "name": "mongo_scraper",
+  "name": "mongo-scraper",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cxwang001/mongo_scraper.git"
+    "url": "git+https://github.com/ashwritescode/mongo-scraper.git"
   },
-  "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/cxwang001/mongo_scraper/issues"
+    "url": "https://github.com/ashwritescode/mongo-scraper/issues"
   },
-  "homepage": "https://github.com/cxwang001/mongo_scraper#readme",
+  "homepage": "https://github.com/ashwritescode/mongo-scraper#readme",
   "dependencies": {
-    "body-parser": "^1.17.2",
-    "cheerio": "^1.0.0-rc.2",
-    "express": "^4.15.4",
+    "body-parser": "^1.16.1",
+    "cheerio": "^0.22.0",
+    "express": "^4.14.1",
     "express-handlebars": "^3.0.0",
-    "mongojs": "^2.4.0",
-    "mongoose": "^4.11.6",
-    "morgan": "^1.8.2",
-    "request": "^2.81.0"
+    "moment": "^2.17.1",
+    "mongoose": "^4.8.5",
+    "morgan": "^1.8.1",
+    "path": "^0.12.7",
+    "request": "^2.79.0"
   }
 }

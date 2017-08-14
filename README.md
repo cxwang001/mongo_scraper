@@ -1,1 +1,1 @@
-# mongo_scraper
+# mongo-scraper

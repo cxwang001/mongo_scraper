@@ -1,11 +1,89 @@
-<h1>Web Development Reddit Articles</h1>
 
-<h2>Click here to get the Web Development Articles from the Reddit!</h2>
+{{!-- Iterate Over all the articles --}}
+{{#each articles}}
+  <ul>
 
-<ul>
-    {{#each article}}
-      <p>{{title}}</p>
-      <p>{{link}}</p>
-      <hr>
-    {{/each}}
-</ul>
+    <!-- Article Drop Down -->
+    <li>
+      <div>
+       <b>{{updated}}</b>
+        <div><b>{{title}}</b></div>
+      </div>
+      <div>
+        <p>
+          {{summary}}
+
+          <i>You can read the full article <a href="{{link}}" target="_new">here</a>.</i>
+        </p>
+          
+      </div>
+    </li>
+
+
+    <!-- Add Comments Drop Down -->
+    <li>
+      <p>Add a Note</p>
+      <div>
+
+        <form id="form-add-{{_id}}" action="add/comment/{{_id}}" method="post">
+
+
+          
+          <!-- Comment Input -->
+          <div class="row">
+              <textarea id="comment_box" name="comment"></textarea>
+          
+          </div>
+
+            <!-- Submit Button -->
+            <div class="row">
+              <center><input class="btn btn-success" data-id="{{_id}}" type="submit" value="Submit"></center>
+            </div>
+            <br>
+        </form>
+
+      </div>
+    </li>
+
+
+    <!-- View Notes -->
+    <li>
+      <div>View All Notes:</div>
+      <div style="background-color: white;">
+      
+        {{!-- Check if the article has comments --}}
+        {{#if comments}}
+
+          {{!-- Article has comments so iterate over them  --}}
+          <ul class="collection">
+            {{#each comments}}
+            
+              <li class="collection-item">
+
+                {{!-- Add a Delete Button --}}
+                <span class="badge">
+                  <form id="form-delete-{{_id}}" action="remove/comment/{{_id}}" method="post">
+                    <input class="btn-small" data-id="{{_id}}" type="submit" value="Delete" style="color: white; background-color: red; border-color: red;">
+                  </form>
+                </span>
+
+                <br>
+
+                {{!-- Add the Content of notes--}}
+                {{content}}
+
+              </li> 
+            {{/each}}
+          </ul>
+        
+        {{!-- No comments, so display message --}}
+        {{else}}
+          <p>No Notes yet! </p>
+        {{/if}}
+            
+        
+      </div>
+    </li>
+
+  </ul>
+{{/each}}
